@@ -1,0 +1,28 @@
+{
+    "name": "Amuzantiu",
+    "version": "1.0.5",
+    "engines": {
+        "node": "16.9.x"
+    },
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.21.3",
+        "dayjs": "^1.10.7",
+        "discord.js": "^13.1.0",
+        "erela.js": "^2.3.3",
+        "erela.js-filters": "^1.2.6",
+        "erela.js-spotify": "^1.2.0",
+        "pdfjs-dist": "^2.9.359",
+        "random": "^3.0.6",
+        "sharp": "^0.29.0",
+        "xml2js": "^0.4.23"
+    }
+}
