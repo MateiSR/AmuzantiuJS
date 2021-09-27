@@ -11,8 +11,10 @@ npm start
 
 ## Usage
 Set TOKEN environmental variable to your bot's:
+# Windows
 ```powershell
 $Env:TOKEN = ""
+$Env:SpotifySecret = ""
 ```
 
 ## Contributing
