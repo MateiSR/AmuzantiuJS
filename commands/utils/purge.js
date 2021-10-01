@@ -1,8 +1,7 @@
 const { Permissions } = require('discord.js');
 
 module.exports = {
-    name: "clear",
-    aliases: ["purge"],
+    name: "purge",
     cooldown: 10000,
     permissions: [Permissions.FLAGS.MANAGE_MESSAGES],
     description: "clear number of messages",

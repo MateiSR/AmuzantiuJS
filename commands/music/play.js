@@ -8,7 +8,7 @@ module.exports = {
     description: "queues a track or playlist",
     async execute(message, args) {
         if (runCheck(message)) return await message.channel.send({ embeds: [embeds.errorEmbed("Not connected to the same voice channel.")] });
-        if (!args[0].length) return;
+        if (!args[0]) return;
         // Retrieves tracks with your query and the requester of the tracks.
         // Note: This retrieves tracks from youtube by default, to get from other sources you must enable them in application.yml and provide a link for the source.
         // Note: If you want to "search" for tracks you must provide an object with a "query" property being the query to use, and "source" being one of "youtube", "soundcloud".
