@@ -34,14 +34,16 @@ module.exports = {
 
         player.stream = true;
         await player.queue.clear();
-        await player.connect();
+        if (player.paused) player.pause(false);
+        if (player.playing) player.stop();
+        if (player.state !== "CONNECTED") await player.connect();
+
         const res = await client.manager.search(
             selectedStreamURI,
             message.author
         );
         let track = res["tracks"][0];
         player.queue.add(track);
-        if (player.playing) player.stop();
         if (!player.playing && !player.paused && !player.queue.size) {
             player.play();
         }
