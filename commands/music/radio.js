@@ -32,6 +32,7 @@ module.exports = {
             selfDeafen: true,
         });
 
+        player.stream = true;
         await player.queue.clear();
         await player.connect();
         const res = await client.manager.search(

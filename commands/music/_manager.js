@@ -38,6 +38,9 @@ client.manager = new Manager({
         clearTimeout(player.timeoutID);
         player.timeoutID = undefined;
         if (player.currentTrack == track) return;
+
+        if (track.duration == 9223372036854776000) player.stream = true;
+
         let parsedDuration = parseDuration(track.duration);
         client.channels.cache
             .get(player.textChannel)

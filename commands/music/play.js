@@ -28,6 +28,13 @@ module.exports = {
         // Connect to the voice channel.
         if (player.state !== "CONNECTED") await player.connect();
 
+        // Stream check
+        if (player.stream) {
+            player.stream = false;
+            player.setTrackRepeat(false);
+            player.stop();
+        }
+
         /*
         # Valid loadTypes are:
         #   TRACK_LOADED    - single video/direct URL)
