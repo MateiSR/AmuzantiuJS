@@ -10,7 +10,12 @@ dayjs.tz.setDefault("Europe/Bucharest");
 
 async function getContent(date) {
     let formattedDate = date.format("DDMMYYYY");
-    let src = `https://is.prefectura.mai.gov.ro/wp-content/uploads/sites/49/2021/09/RI1K14_${formattedDate}.pdf`;
+    var month = (date.month() + 1).toString();
+    if (date.month() + 1 < 10) {
+        month = "0" + month;
+    }
+    let year = date.year();
+    let src = `https://is.prefectura.mai.gov.ro/wp-content/uploads/sites/49/${year}/${month}/RI1K14_${formattedDate}.pdf`;
     const doc = await pdfjs.getDocument(src).promise; // note the use of the property promise
     const page = await doc.getPage(1);
     return await page.getTextContent();
