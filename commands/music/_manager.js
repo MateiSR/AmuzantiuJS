@@ -41,7 +41,6 @@ client.manager = new Manager({
         let parsedDuration = parseDuration(track.duration);
         client.channels.cache
             .get(player.textChannel)
-            //.send(`Now playing: ${track.title}`);
             .send({ embeds: [embeds.replyEmbed(`Playing [${track.title}](${track.uri}) - ${parsedDuration} [${track.requester}]`)] });
         player.currentTrack = track;
     })
@@ -51,12 +50,6 @@ client.manager = new Manager({
         player.setTrackRepeat(false);
     })
     .on("queueEnd", (player) => {
-        /*
-        client.channels.cache
-            .get(player.textChannel)
-            .send("Queue has ended.");
-        player.destroy();
-        */
         player.timeoutID = undefined;
         player.timeoutID = setTimeout(() => {
             client.channels.cache

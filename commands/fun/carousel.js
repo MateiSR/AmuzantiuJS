@@ -1,6 +1,7 @@
 module.exports = {
     name: "carousel",
     description: "moves you. fast.",
+    cooldown: 60000,
     aliases: ["fastmove"],
     async execute(message, args) {
         let i = 0;
