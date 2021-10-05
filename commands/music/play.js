@@ -26,7 +26,7 @@ module.exports = {
         });
 
         // Connect to the voice channel.
-        await player.connect();
+        if (player.state !== "CONNECTED") await player.connect();
 
         /*
         # Valid loadTypes are:
