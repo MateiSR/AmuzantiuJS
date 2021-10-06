@@ -23,7 +23,12 @@ async function getContent(date) {
 
 async function getData(date) {
     let formattedDate = date.format("DDMMYYYY");
-    let src = `https://is.prefectura.mai.gov.ro/wp-content/uploads/sites/49/2021/09/RI1K14_${formattedDate}.pdf`;
+    var month = (date.month() + 1).toString();
+    if (date.month() + 1 < 10) {
+        month = "0" + month;
+    }
+    let year = date.year();
+    let src = `https://is.prefectura.mai.gov.ro/wp-content/uploads/sites/49/${year}/${month}/RI1K14_${formattedDate}.pdf`;
     try {
         var content = await getContent(date);
     } catch (error) {
@@ -32,7 +37,8 @@ async function getData(date) {
     let data = content.items.map((item) => item.str);
     let city = data[20];
     let incidence = data[22];
-    return [date.format("DD/MM/YYYY"), city, incidence];
+    console.log(src);
+    return [date.format("DD/MM/YYYY"), city, incidence, src];
 }
 
 module.exports = {
@@ -43,7 +49,10 @@ module.exports = {
         let date = dayjs();
         await getData(date).then(function(ret) {
             message.channel.send({
-                embeds: [embeds.replyEmbed(`\`${ret[2]}\` - incidence rate in \`${ret[1]}\`\nlatest data available: \`${ret[0]}\``)]
+                embeds: [embeds.replyEmbed(`\`${ret[2]}\` - Rata de incidență in  \`${ret[1]}\`\nActualizat la data de: \`${ret[0]}\``)
+                    .setTitle("Click pentru lista completa")
+                    .setURL(ret[3])
+                ]
             });
         });
     }
