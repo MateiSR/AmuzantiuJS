@@ -43,6 +43,7 @@ module.exports = {
             message.author
         );
         let track = res["tracks"][0];
+        track.title = selectedStream;
         player.queue.add(track);
         if (!player.playing && !player.paused && !player.queue.size) {
             player.play();
