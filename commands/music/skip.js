@@ -4,7 +4,7 @@ const { voiceCheck, runCheck } = require("../../utils/decorators.js");
 
 module.exports = {
     name: "skip",
-    aliases: ["n", "next", "s"],
+    aliases: ["n", "next", "s", "forward"],
     description: "skips current track",
     async execute(message, args) {
         if (!await voiceCheck(message)) return await message.channel.send({ embeds: [embeds.errorEmbed("Not playing.")] });
