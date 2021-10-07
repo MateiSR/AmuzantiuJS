@@ -12,8 +12,8 @@ module.exports = {
         if (runCheck(message)) return;
         if (player.currentTrack == undefined) return;
         let track = player.currentTrack;
-        let parsedDuration = parseDuration(track.duration);
         let parsedPosition = parseDuration(player.position);
+        let parsedDuration = parseDuration(track.duration);
         await message.channel.send({ embeds: [embeds.replyEmbed(`Playing [${track.title}](${track.uri})\n ${parsedPosition} / ${parsedDuration} [${track.requester}]`)] });
     }
 }

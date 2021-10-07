@@ -14,15 +14,15 @@ const getQueuePage = function(player, pageNum) {
     // Add current track
     if (pageNum == 1) {
         let cTrack = player.queue.current;
-        let cTLength = parseDuration(cTrack.duration);
-        c = `--> ${cTrack.title.slice(0, 40)}`;
-        c2 = c + " ".repeat(48 - c.length) + cTLength;
+        let parsedPosition = parseDuration(player.position);
+        let parsedDuration = parseDuration(cTrack.duration);
+        c = `--> ${cTrack.title} --- ${parsedPosition} / ${parsedDuration}`;
         formattedQueue.push(c);
     }
 
     for (song of page) {
         songLength = parseDuration(song.duration);
-        c = `${songNum + 1 + 10 * (pageNum - 1)}) ${song.title.slice(0, 40)}`;
+        c = `${songNum + 1 + 10 * (pageNum - 1)}) ${song.title.slice(0, 40).replace("\"", "").replace(/^\s+|\s+$/g, '')}`;
         c2 = c + " ".repeat(48 - c.length) + songLength;
         songNum++;
         formattedQueue.push(c2);
