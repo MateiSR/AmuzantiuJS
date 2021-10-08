@@ -46,29 +46,29 @@ module.exports = {
         if (res["loadType"] == "PLAYLIST_LOADED") {
             let tracks = res["tracks"];
             for (track of tracks) {
+
                 // Add all tracks of playlist to queue
                 player.queue.add(track);
             }
             await message.channel.send({ embeds: [embeds.replyEmbed(`Queued **${res["playlist"]["name"]}** - ${tracks.length} tracks`)] });
+            // For playlists you'll have to use slightly different if statement
+            if (!player.playing &&
+                !player.paused &&
+                player.queue.totalSize === res.tracks.length
+            ) {
+                player.play();
+            }
         } else {
             let track = res["tracks"][0];
             player.queue.add(track);
             await message.channel.send({ embeds: [embeds.replyEmbed(`Queued [${track.title}](${track.uri}) [${message.author}]`)] });
+
+            // Plays the player (plays the first track in the queue).
+            // The if statement is needed else it will play the current track again
+            if (!player.playing && !player.paused && !player.queue.size) {
+                player.play();
+            }
         }
 
-        // Debug // console.log(`Playing: ${player.playing}\nPaused: ${player.paused}\nQueue size: ${player.queue.size}\nQueue total size: ${player.queue.totalSize}\n`);
-        // Plays the player (plays the first track in the queue).
-        // The if statement is needed else it will play the current track again
-        if (!player.playing && !player.paused && !player.queue.size) {
-            player.play();
-        }
-
-        // For playlists you'll have to use slightly different if statement
-        if (!player.playing &&
-            !player.paused &&
-            player.queue.totalSize === res.tracks.length
-        ) {
-            player.play();
-        }
     }
 }
