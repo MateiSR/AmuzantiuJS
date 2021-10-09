@@ -56,7 +56,7 @@ module.exports = {
                 )
                 .setColor("#5865F2");
             for (let i = 1; i <= resLength; i++) {
-                let track = res["tracks"][i];
+                let track = player.selectOptions[i - 1];
                 embed.addField(`${i}) ${track.title}`, `by **${track.author}** - ${parseDuration(track.duration)}`);
             }
             embed.setFooter(`React or use ${prefix}select`);
@@ -80,24 +80,19 @@ module.exports = {
             selectEmbed.awaitReactions({ filter, max: 1, time: 60000, errors: ["time"] })
                 .then(collected => {
                     const reaction = collected.first();
-                    switch (reaction.emoji.name) {
-                        case "1️⃣":
-                            chosenIndex = 1;
-                        case "2️⃣":
-                            chosenIndex = 2;
-                        case "3️⃣":
-                            chosenIndex = 3;
-                        case "4️⃣":
-                            chosenIndex = 4;
-                        case "1️5️⃣":
-                            chosenIndex = 5;
-                    }
 
+                    if (reaction.emoji.name == "1️⃣") chosenIndex = 1;
+                    else if (reaction.emoji.name == "2️⃣") chosenIndex = 2;
+                    else if (reaction.emoji.name == "3️⃣") chosenIndex = 3;
+                    else if (reaction.emoji.name == "4️⃣") chosenIndex = 4;
+                    else if (reaction.emoji.name == "5️⃣") chosenIndex = 5;
+
+                    console.log(chosenIndex);
                     if (!res["tracks"][chosenIndex - 1]) {
                         selectEmbed.edit({ embeds: [embeds.errorEmbed("Invalid choice")] });
                         return;
                     };
-                    let track = res["tracks"][chosenIndex - 1];
+                    let track = player.selectOptions[chosenIndex - 1];
                     player.queue.add(track);
 
                     if (!player.playing && !player.paused && !player.queue.size) {
