@@ -87,7 +87,6 @@ module.exports = {
                     else if (reaction.emoji.name == "4️⃣") chosenIndex = 4;
                     else if (reaction.emoji.name == "5️⃣") chosenIndex = 5;
 
-                    console.log(chosenIndex);
                     if (!res["tracks"][chosenIndex - 1]) {
                         selectEmbed.edit({ embeds: [embeds.errorEmbed("Invalid choice")] });
                         return;
