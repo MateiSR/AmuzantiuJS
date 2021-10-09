@@ -26,7 +26,8 @@ module.exports = {
         const commandNames = client.modules.get(args[0]);
         for (commandName of commandNames) {
             let command = client.commands.get(commandName);
-            embed.addField(commandName, command.description, true)
+            if (command.aliases) embed.addField(commandName, `**aliases**: ${command.aliases.join(" ")}\n**description**: ${command.description}`, true);
+            else embed.addField(commandName, `**description**: ${command.description}`, true);
         }
         return await message.channel.send({ embeds: [embed] });
     }

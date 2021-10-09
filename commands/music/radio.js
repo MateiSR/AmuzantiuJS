@@ -14,7 +14,9 @@ module.exports = {
             for (const [name, streamUrl] of Object.entries(radio)) {
                 formattedStreams.push(`${++streamIndex}. ${name} - ${streamUrl}`);
             }
-            return await message.channel.send(`\`\`\`nim\n${formattedStreams.join("\n")}\`\`\``);
+            return await message.channel.send(
+                `\`\`\`nim\n${formattedStreams.join("\n")}\`\`\``
+            );
         }
         // check if entry exists in //Object.keys(radio)
         if (Object.keys(radio).length < parseInt(args[0])) return;
@@ -23,7 +25,10 @@ module.exports = {
         let selectedStreamURI = radio[selectedStream];
 
         // Abuse prevention checks
-        if (runCheck(message)) return await message.channel.send({ embeds: [embeds.errorEmbed("Not connected to the same voice channel.")] });
+        if (runCheck(message))
+            return await message.channel.send({
+                embeds: [embeds.errorEmbed("Not connected to the same voice channel.")],
+            });
         // Create a new player. This will return the player if it already exists.
         const player = client.manager.create({
             guild: message.guild.id,
@@ -38,16 +43,12 @@ module.exports = {
         if (player.playing) player.stop();
         if (player.state !== "CONNECTED") await player.connect();
 
-        const res = await client.manager.search(
-            selectedStreamURI,
-            message.author
-        );
+        const res = await client.manager.search(selectedStreamURI, message.author);
         let track = res["tracks"][0];
         track.title = selectedStream;
         player.queue.add(track);
         if (!player.playing && !player.paused && !player.queue.size) {
             player.play();
         }
-
-    }
-}
+    },
+};

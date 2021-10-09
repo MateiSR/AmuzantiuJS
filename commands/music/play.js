@@ -1,5 +1,4 @@
 const embeds = require("../../utils/embeds.js");
-const { Manager } = require("erela.js");
 const { runCheck } = require("../../utils/decorators.js");
 
 module.exports = {
@@ -58,7 +57,7 @@ module.exports = {
             ) {
                 player.play();
             }
-        } else {
+        } else if (res["loadType"] == "SEARCH_RESULT" || res["loadType"] == "TRACK_LOADED") {
             let track = res["tracks"][0];
             player.queue.add(track);
             await message.channel.send({ embeds: [embeds.replyEmbed(`Queued [${track.title}](${track.uri}) [${message.author}]`)] });
@@ -68,6 +67,10 @@ module.exports = {
             if (!player.playing && !player.paused && !player.queue.size) {
                 player.play();
             }
+        } else if (res["loadType"] == "NO_MATCHES") {
+            await message.channel.send({ embeds: [embeds.errorEmbed(`No matches found for \`${args.join(" ")}\` [${message.author}]`)] });
+        } else if (res["loadType"] == "LOAD_FAILED") {
+            await message.channel.send({ embeds: [embeds.errorEmbed(`Failed to load results for \`${args.join(" ")}\` [${message.author}]`)] });
         }
 
     }
