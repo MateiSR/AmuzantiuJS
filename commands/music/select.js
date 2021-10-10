@@ -20,9 +20,11 @@ module.exports = {
 
         player.selectEmbed.edit({ embeds: [embeds.replyEmbed(`Queued [${track.title}](${track.uri}) [${message.author}]`)] });
 
-        try {
-            player.selectEmbed.reactions.removeAll();
-        } catch {}
+        setTimeout(() => {
+            try {
+                player.selectEmbed.reactions.removeAll();
+            } catch {}
+        }, 3000);
 
         delete player.selectOptions;
         delete player.selectEmbed;

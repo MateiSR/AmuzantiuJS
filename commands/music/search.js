@@ -100,9 +100,11 @@ module.exports = {
 
                     selectEmbed.edit({ embeds: [embeds.replyEmbed(`Queued [${track.title}](${track.uri}) [${message.author}]`)] });
 
-                    try {
-                        selectEmbed.reactions.removeAll();
-                    } catch {}
+                    setTimeout(() => {
+                        try {
+                            selectEmbed.reactions.removeAll();
+                        } catch {}
+                    }, 3000);
 
                     return;
                 })
