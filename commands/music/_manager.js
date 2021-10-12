@@ -12,10 +12,10 @@ const clientSecret = process.env.SpotifySecret;
 client.manager = new Manager({
         // Pass an array of node. Note: You do not need to pass any if you are using the default values (ones shown below).
         nodes: [{
-            host: "lava.link",
-            port: 80,
-            password: "1234",
-            identifier: "lava-dot-link"
+            host: "143.47.190.132",
+            port: 2333,
+            password: process.env.LAVALINK_PASS,
+            identifier: "cloud-01"
         }],
         plugins: [ // Initiate the plugin and pass the two required options.
             new Spotify({
