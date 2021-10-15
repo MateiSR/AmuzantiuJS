@@ -1,3 +1,5 @@
+const { MessageEmbed } = require("discord.js");
+
 module.exports = {
     cleanCode: function(text) {
         if (typeof(text) === "string")
@@ -51,5 +53,19 @@ module.exports = {
         while (time.length < 4) time.splice(0, 0, 0);
         let ret = parseInt(time[0]) * 60 * 60 * 24 + parseInt(time[1]) * 60 * 60 + parseInt(time[2]) * 60 + parseInt(time[3]);
         return ret;
+    },
+
+    getPlayMessage: function(track) {
+
+        const { parseDuration } = require("./format.js");
+        const playMessage = new MessageEmbed()
+            .setTitle("🎵   Added to queue")
+            .setColor("#5865F2")
+            .setThumbnail(track.thumbnail)
+            .setDescription(`[${track.title}](${track.uri})`)
+            .addField("Channel", track.author, true)
+            .addField("Song Duration", parseDuration(track.duration), true);
+
+        return playMessage;
     }
 }

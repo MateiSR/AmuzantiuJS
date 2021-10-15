@@ -2,6 +2,7 @@ const embeds = require("../../utils/embeds.js");
 const { MessageEmbed } = require("discord.js");
 const { runCheck } = require("../../utils/decorators.js");
 const { parseDuration } = require("../../utils/format.js");
+const { getPlayMessage } = require("../../utils/format.js");
 
 module.exports = {
     name: "search",
@@ -98,7 +99,7 @@ module.exports = {
                         player.play();
                     }
 
-                    selectEmbed.edit({ embeds: [embeds.replyEmbed(`Queued [${track.title}](${track.uri}) [${message.author}]`)] });
+                    selectEmbed.edit({ embeds: [getPlayMessage(track)] });
 
                     setTimeout(() => {
                         try {
@@ -118,7 +119,7 @@ module.exports = {
         } else if (res["loadType"] == "TRACK_LOADED") {
             let track = res["tracks"][0];
             player.queue.add(track);
-            await message.channel.send({ embeds: [embeds.replyEmbed(`Queued [${track.title}](${track.uri}) [${message.author}]`)] });
+            await message.channel.send({ embeds: [getPlayMessage(track)] });
 
             // Plays the player (plays the first track in the queue).
             // The if statement is needed else it will play the current track again
