@@ -2,33 +2,24 @@ const embeds = require("../../utils/embeds.js");
 const { chunkArray, parseDuration } = require("../../utils/format.js");
 const { runCheck } = require("../../utils/decorators.js");
 const current = require("./current.js");
+const { MessageEmbed } = require("discord.js");
 
 const getQueuePage = function(player, pageNum) {
     // pageNum = index + 1
     let queueSliced = chunkArray(player.queue, 10);
-    let songLength;
-    var formattedQueue = [];
-    let c, c2, ret;
-    var songNum = 0;
+    const toSend = new MessageEmbed()
+        .setTitle(`Queue for ${player.guild} | Page ${pageNum}/${queueSliced.length}`);
     let page = queueSliced[pageNum - 1];
+
     // Add current track
     if (pageNum == 1) {
         let cTrack = player.queue.current;
         let parsedPosition = parseDuration(player.position);
         let parsedDuration = parseDuration(cTrack.duration);
-        c = `--> ${cTrack.title} --- ${parsedPosition} / ${parsedDuration}`;
-        formattedQueue.push(c);
+        toSend.addField(`Now playing: [${cTrack.title}](${cTrack.uri})`, `Among`)
     }
 
-    for (song of page) {
-        songLength = parseDuration(song.duration);
-        c = `${songNum + 1 + 10 * (pageNum - 1)}) ${song.title.slice(0, 40).replace("\"", "").replace(/^\s+|\s+$/g, '')}`;
-        c2 = c + " ".repeat(48 - c.length) + songLength;
-        songNum++;
-        formattedQueue.push(c2);
-    }
-    ret = formattedQueue.join("\n");
-    return `\`\`\`nim\nPage ${pageNum}/${queueSliced.length}\n${ret}\`\`\``;
+    return toSend;
 };
 
 module.exports = {
@@ -44,7 +35,7 @@ module.exports = {
         let parsedPageNum = parseInt(args[0]);
         if (!args[0]) parsedPageNum = 1;
         if (parsedPageNum != NaN) {
-            if (parsedPageNum <= queueSliced.length && parsedPageNum >= 1) return await message.channel.send(getQueuePage(player, parsedPageNum));
+            if (parsedPageNum <= queueSliced.length && parsedPageNum >= 1) return await message.channel.send({ embeds: [getQueuePage(player, parsedPageNum)] });
         }
     }
 }
