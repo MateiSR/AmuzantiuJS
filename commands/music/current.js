@@ -2,6 +2,7 @@ const embeds = require("../../utils/embeds.js");
 const { runCheck } = require("../../utils/decorators.js");
 const { MessageEmbed } = require("discord.js");
 const { parseDuration } = require("../../utils/format.js");
+const { progressBar } = require("../../utils/progressBar.js");
 
 module.exports = {
     name: "current",
@@ -21,7 +22,7 @@ module.exports = {
             .setThumbnail(track.thumbnail)
             .setDescription(`[${track.title}](${track.uri})`)
             .addField("Channel", track.author, true)
-            .addField("Position", `${parsedPosition} / ${parsedDuration}`, true)
+            .addField("Position", `\`\`\`${progressBar(player.position, track.duration, 20)} ${parsedPosition} / ${parsedDuration}\`\`\``)
         await message.channel.send({ embeds: [currentSong] });
     }
 }
