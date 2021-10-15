@@ -1,5 +1,6 @@
 const embeds = require("../../utils/embeds.js");
 const { runCheck } = require("../../utils/decorators.js");
+const { MessageEmbed } = require("discord.js");
 const { parseDuration } = require("../../utils/format.js");
 
 module.exports = {
@@ -14,6 +15,13 @@ module.exports = {
         let track = player.currentTrack;
         let parsedPosition = parseDuration(player.position);
         let parsedDuration = parseDuration(track.duration);
-        await message.channel.send({ embeds: [embeds.replyEmbed(`Playing [${track.title}](${track.uri})\n ${parsedPosition} / ${parsedDuration} [${track.requester}]`)] });
+        const currentSong = new MessageEmbed()
+            .setColor("#5865F2")
+            .setTitle(`🎵   Now playing`)
+            .setThumbnail(track.thumbnail)
+            .setDescription(`[${track.title}](${track.uri})`)
+            .addField("Channel", track.author, true)
+            .addField("Position", `${parsedPosition} / ${parsedDuration}`, true)
+        await message.channel.send({ embeds: [currentSong] });
     }
 }
