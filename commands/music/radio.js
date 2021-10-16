@@ -1,6 +1,7 @@
 const { runCheck } = require("../../utils/decorators.js");
 const embeds = require("../../utils/embeds.js");
 const radio = require("../../data/radio.json");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "radio",
@@ -10,13 +11,17 @@ module.exports = {
         // iterate keys & values of radio streams
         var streamIndex = 0;
         var formattedStreams = [];
+        const toSend = new MessageEmbed()
+            .setColor("#5865F2")
+            .setTitle(`Usage: ${prefix}radio <index>`);
+
         if (!args[0] || isNaN(args[0])) {
             for (const [name, streamUrl] of Object.entries(radio)) {
-                formattedStreams.push(`${++streamIndex}. ${name} - ${streamUrl}`);
+                formattedStreams.push(`\`${++streamIndex}\`. ${name} - ${streamUrl}`);
             }
-            return await message.channel.send(
-                `\`\`\`nim\n${formattedStreams.join("\n")}\`\`\``
-            );
+
+            toSend.setDescription(formattedStreams.join("\n\n"))
+            return await message.channel.send({ embeds: [toSend] });
         }
         // check if entry exists in //Object.keys(radio)
         if (Object.keys(radio).length < parseInt(args[0])) return;

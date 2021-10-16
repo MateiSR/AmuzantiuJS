@@ -6,5 +6,10 @@
     "Radio Gangsta Manele": "http://live.radiogangsta.ro:8800/;",
     "Radio Taraf": "http://asculta.radiotaraf.com:7100/;",
     "Manele FM": "http://live.radiomanelefm.ro",
-    "Radio Expert": "http://expertfm.zapto.org:8000/stream"
+    "Radio Expert": "http://expertfm.zapto.org:8000/stream",
+    "Virgin Radio": "http://astreaming.virginradio.ro:8000/virgin_aacp_64k",
+    "Radio Trinitas": "http://live.radiotrinitas.ro:8000/",
+    "Impact FM": "http://109.166.241.233:8500/",
+    "ANISON.FM": "http://anison.fm/anison.m3u",
+    "J-Pop Big B Radio": "http://jpop.bigbradio.net"
 }
