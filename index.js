@@ -54,8 +54,10 @@ client.on("messageCreate", async message => {
     if (c == undefined) return;
 
     // Permissions check
-    if (!message.channel.permissionsFor(message.author.id).has(c.permissions)) return await message.reply("You **don't** have the necessary permissions **in this channel**.");
-    if (!message.channel.permissionsFor(client.user.id).has(c.permissions)) return await message.reply(`${client.user} **doesn't** have the necessary permissions **in this channel**.`);
+    if (c.permissions) {
+        if (!message.channel.permissionsFor(message.author.id).has(c.permissions)) return await message.reply("You **don't** have the necessary permissions **in this channel**.");
+        if (!message.channel.permissionsFor(client.user.id).has(c.permissions)) return await message.reply(`${client.user} **doesn't** have the necessary permissions **in this channel**.`);
+    }
 
     // Check cooldown
     if (!client.cooldowns.has(c.name)) client.cooldowns.set(c.name, new Discord.Collection());
