@@ -54,8 +54,8 @@ client.on("messageCreate", async message => {
     if (c == undefined) return;
 
     // Permissions check
-    if (!message.channel.permissionsFor(message.author.id).has(c.permissions)) return await message.reply("You don't have the necessary permissions.");
-    if (!message.channel.permissionsFor(client.user.id).has(c.permissions)) return await message.reply(`${client.user} doesn't have the necessary permissions.`);
+    if (!message.channel.permissionsFor(message.author.id).has(c.permissions)) return await message.reply("You **don't** have the necessary permissions **in this channel**.");
+    if (!message.channel.permissionsFor(client.user.id).has(c.permissions)) return await message.reply(`${client.user} **doesn't** have the necessary permissions **in this channel**.`);
 
     // Check cooldown
     if (!client.cooldowns.has(c.name)) client.cooldowns.set(c.name, new Discord.Collection());
@@ -73,19 +73,13 @@ client.on("messageCreate", async message => {
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
     // Check whitelist/blacklist
-    if (c.whitelist) {
-        if (!c.whitelist.includes(message.author.id.toString())) return;
-    }
-    if (c.blacklist) {
-        if (c.blacklist.includes(message.author.id.toString())) return;
-    }
+    if (c.whitelist && !c.whitelist.includes(message.author.id.toString())) return;
+    if (c.blacklist && c.blacklist.includes(message.author.id.toString())) return console.log("a");
 
     // Run command
     try {
         await c.execute(message, args);
-    } catch (error) {
-        console.error(error); // debug
-    };
+    } catch (error) {};
 });
 
 client.once("ready", async() => {
