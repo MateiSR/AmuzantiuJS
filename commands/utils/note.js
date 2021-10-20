@@ -42,7 +42,7 @@ module.exports = {
                         await message.react("✅");
                         break;
                     case "delete":
-                        if (savedNotes === null) return await message.reply("No notes have been created thus far.");
+                        if (current === null || savedNotes.length == 0) return await message.reply("No notes have been created thus far.");
                         if (!parseInt(args[1]) || !(savedNotes[parseInt(args[1]) - 1])) return await message.reply("Invalid note number.");
 
                         savedNotes.splice(parseInt(args[1]) - 1, 1);
@@ -59,7 +59,7 @@ module.exports = {
 
                         break;
                     case "list":
-                        if (savedNotes === null) return await message.reply("No notes have been created thus far.");
+                        if (current === null || savedNotes.length == 0) return await message.reply("No notes have been created thus far.");
 
                         for (i = 0; i < savedNotes.length; i++) {
                             savedNotes[i] = `\`${i + 1}.\` ${savedNotes[i].content}\nAdded at \`${savedNotes[i].dateAdded}\``
@@ -72,7 +72,7 @@ module.exports = {
                         await message.channel.send({ embeds: [toSend] });
                         break;
                     case "clear":
-                        if (savedNotes === null || savedNotes.length == 0) return await message.reply("No notes have been created thus far.");
+                        if (current === null || savedNotes.length == 0) return await message.reply("No notes have been created thus far.");
                         const confirmMessage = await message.reply(`Are you sure you want to delete ${savedNotes.length} notes?`);
                         const filter = (reaction, user) => ["✅", "❌"].includes(reaction.emoji.name) && !user.bot && user.id == message.author.id;
                         for (reaction of["✅", "❌"]) await confirmMessage.react(reaction);
