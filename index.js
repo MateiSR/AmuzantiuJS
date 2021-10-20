@@ -25,7 +25,7 @@ client.once("ready", async() => {
     // Load prefixes
     commandBase.loadPrefixes(client);
     // Update user presence
-    client.user.setPresence({ activities: [{ name: `v${version} | ${prefix}help` }], status: 'online' });
+    client.user.setPresence({ activities: [{ name: `v${version} | ${commandBase.globalPrefix}help` }], status: 'online' });
 });
 
 client.login(process.env.TOKEN);

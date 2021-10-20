@@ -34,6 +34,8 @@ async function startSort(result, message, search, targetChannel) {
             else if (reaction.emoji.name == "❌") return true;
             else if (reaction.emoji.name == "⛔") return false;
             else return;
+        }).catch((collected) => {
+            return message.channel.send({ embeds: [embeds.errorEmbed(`Timed out after 45 seconds [${message.author}]`)] });
         });
         if (funcRes == false) break;
     }

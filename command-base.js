@@ -13,7 +13,6 @@ client.on("messageCreate", async message => {
 
     // Prefix handler
     const prefix = guildPrefixes[message.guild.id] || globalPrefix;
-    console.log(`Running with ${prefix}`)
 
     // Only responds to user-created commands
     if (!message.content.startsWith(prefix) || message.author.bot) return;
