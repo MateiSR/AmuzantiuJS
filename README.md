@@ -19,6 +19,7 @@ Set TOKEN environmental variable to your bot's:
 ```powershell
 $Env:TOKEN = ""
 $Env:SpotifySecret = ""
+$Env:LAVALINK_PASS = "" (to be changed)
 ```
 
 ## Contributing

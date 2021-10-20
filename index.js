@@ -76,7 +76,7 @@ client.on("messageCreate", async message => {
 
     // Check whitelist/blacklist
     if (c.whitelist && !c.whitelist.includes(message.author.id.toString())) return;
-    if (c.blacklist && c.blacklist.includes(message.author.id.toString())) return console.log("a");
+    if (c.blacklist && c.blacklist.includes(message.author.id.toString())) return;
 
     // Run command
     try {
