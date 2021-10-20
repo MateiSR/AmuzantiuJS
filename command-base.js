@@ -82,7 +82,6 @@ module.exports.loadCommandFiles = async() => {
 }
 
 /**
- * I forgot to add this function to the video.
  * It updates the cache when the !setprefix command is ran.
  */
 module.exports.updateCache = (guildId, newPrefix) => {
@@ -96,7 +95,11 @@ module.exports.loadPrefixes = async(client) => {
                 const guildId = guild[1].id
 
                 const result = await commandPrefixSchema.findOne({ _id: guildId })
-                guildPrefixes[guildId] = result.prefix
+                if (result) {
+                    guildPrefixes[guildId] = result.prefix
+                } else {
+                    guildPrefixes[guildId] = "a "
+                }
             }
 
         } finally {
