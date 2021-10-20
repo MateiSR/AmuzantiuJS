@@ -14,12 +14,13 @@ npm start
 
 Set TOKEN environmental variable to your bot's:
 
-### Windows (Powershell)
+### .env
 
-```powershell
-$Env:TOKEN = ""
-$Env:SpotifySecret = ""
-$Env:LAVALINK_PASS = "" (to be changed)
+```env
+TOKEN = ""
+SpotifySecret = ""
+LAVALINK_PASS = "" (to be changed)
+MONGODB_SRV = ""
 ```
 
 ## Contributing
