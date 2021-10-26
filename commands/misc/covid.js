@@ -35,8 +35,8 @@ async function getData(date) {
         return await getData(date.subtract(1, "day"));
     }
     let data = content.items.map((item) => item.str);
-    let city = data[20];
-    let incidence = data[22];
+    let city = data[21];
+    let incidence = data[23];
     return [date.format("DD/MM/YYYY"), city, incidence, src];
 }
 
