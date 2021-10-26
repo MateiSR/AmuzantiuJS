@@ -1,4 +1,5 @@
 const embeds = require('../../utils/embeds.js');
+const { getPlayMessage } = require("../../utils/format.js");
 
 module.exports = {
     name: "select",
@@ -18,7 +19,7 @@ module.exports = {
             player.play();
         }
 
-        player.selectEmbed.edit({ embeds: [embeds.replyEmbed(`Queued [${track.title}](${track.uri}) [${message.author}]`)] });
+        player.selectEmbed.edit({ embeds: [getPlayMessage(track, player)] });
 
         setTimeout(() => {
             try {

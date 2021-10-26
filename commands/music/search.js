@@ -3,6 +3,8 @@ const { MessageEmbed } = require("discord.js");
 const { runCheck } = require("../../utils/decorators.js");
 const { parseDuration } = require("../../utils/format.js");
 const { getPlayMessage } = require("../../utils/format.js");
+const { globalPrefix } = require("../../command-base.js");
+
 
 module.exports = {
     name: "search",
@@ -60,7 +62,7 @@ module.exports = {
                 let track = player.selectOptions[i - 1];
                 embed.addField(`${i}) ${track.title}`, `by **${track.author}** - ${parseDuration(track.duration)}`);
             }
-            embed.setFooter(`React or use ${prefix}select`);
+            embed.setFooter(`React or use ${globalPrefix}select`);
 
             let searchTCh = message.channel;
 
@@ -99,7 +101,7 @@ module.exports = {
                         player.play();
                     }
 
-                    selectEmbed.edit({ embeds: [getPlayMessage(track)] });
+                    selectEmbed.edit({ embeds: [getPlayMessage(track, player)] });
 
                     setTimeout(() => {
                         try {

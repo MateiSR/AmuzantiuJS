@@ -2,6 +2,7 @@ const { runCheck } = require("../../utils/decorators.js");
 const embeds = require("../../utils/embeds.js");
 const radio = require("../../data/radio.json");
 const { MessageEmbed } = require("discord.js");
+const { globalPrefix } = require("../../command-base.js");
 
 module.exports = {
     name: "radio",
@@ -13,7 +14,7 @@ module.exports = {
         var formattedStreams = [];
         const toSend = new MessageEmbed()
             .setColor("#5865F2")
-            .setTitle(`Usage: ${prefix}radio <index>`);
+            .setTitle(`Usage: ${globalPrefix}radio <index>`);
 
         if (!args[0] || isNaN(args[0])) {
             for (const [name, streamUrl] of Object.entries(radio)) {

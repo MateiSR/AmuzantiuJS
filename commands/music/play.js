@@ -61,7 +61,7 @@ module.exports = {
         } else if (res["loadType"] == "SEARCH_RESULT" || res["loadType"] == "TRACK_LOADED") {
             let track = res["tracks"][0];
             player.queue.add(track);
-            await message.channel.send({ embeds: [getPlayMessage(track)] });
+            await message.channel.send({ embeds: [getPlayMessage(track, player)] });
 
             // Plays the player (plays the first track in the queue).
             // The if statement is needed else it will play the current track again

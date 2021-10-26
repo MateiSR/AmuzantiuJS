@@ -55,7 +55,7 @@ module.exports = {
         return ret;
     },
 
-    getPlayMessage: function(track) {
+    getPlayMessage: function(track, player) {
 
         const { parseDuration } = require("./format.js");
         const playMessage = new MessageEmbed()
@@ -64,7 +64,14 @@ module.exports = {
             .setThumbnail(track.thumbnail)
             .setDescription(`[${track.title}](${track.uri})`)
             .addField("Channel", track.author, true)
-            .addField("Song Duration", parseDuration(track.duration), true);
+            .addField("Song Duration", parseDuration(track.duration), true)
+            .addField("Requested by", `${track.requester}`, true);
+
+        if (player.queue.size == 0) playMessage.addField("Position in queue", "Playing now");
+        else {
+            playMessage.addField("Position in queue", player.queue.size.toString(), true);
+            playMessage.addField("ETA until playing", parseDuration(player.queue.duration - player.position - track.duration), true);
+        }
 
         return playMessage;
     }
