@@ -25,6 +25,7 @@ async function merge_dices_wrap(roll1, roll2) {
 module.exports = {
     name: "dice",
     description: "classic game of dice.",
+    cooldown: 10000,
     async execute(message, args) {
         var rolls = [];
         const names = ["Hugh Jass", "Mike Hawk", "Ben Dover",

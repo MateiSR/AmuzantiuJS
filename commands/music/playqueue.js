@@ -9,7 +9,7 @@ const { TrackUtils } = require("erela.js");
 module.exports = {
     name: "playqueue",
     description: "plays a queue `listqueues`",
-    aliases: ["playq", "playsaved"],
+    aliases: ["playq", "playsaved", "loadqueue", "loadq"],
     async execute(message, args) {
         // Create a new player. This will return the player if it already exists.
         const player = client.manager.create({
