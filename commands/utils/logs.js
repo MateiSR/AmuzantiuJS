@@ -20,6 +20,7 @@ module.exports = {
                     return await message.channel.send({ embeds: [toSend] });
                 }
 
+                console.log(guildLogs["createdAt"]);
 
                 const desc = [];
                 desc.push(`**${guildLogs["guildTotal"]}** total disconnects`);
