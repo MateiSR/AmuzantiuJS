@@ -70,7 +70,9 @@ module.exports = {
         if (player.queue.size == 0) playMessage.addField("Position in queue", "Playing now");
         else {
             playMessage.addField("Position in queue", player.queue.size.toString(), true);
-            playMessage.addField("ETA until playing", parseDuration(player.queue.duration - player.position - track.duration), true);
+            if (player.queue.current.duration == 9223372036854776000) playMessage.addField("ETA until playing", "Skipping stream, playing now", true);
+            else if (track.duration == 9223372036854776000) playMessage.addField("ETA until playing", "Playing now", true);
+            else playMessage.addField("ETA until playing", parseDuration(player.queue.duration - player.position - track.duration), true);
         }
 
         return playMessage;

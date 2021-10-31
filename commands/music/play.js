@@ -60,6 +60,11 @@ module.exports = {
             }
         } else if (res["loadType"] == "SEARCH_RESULT" || res["loadType"] == "TRACK_LOADED") {
             let track = res["tracks"][0];
+            if (track.duration == 9223372036854776000) {
+                player.queue.clear();
+                if (player.paused) player.pause(false);
+                if (player.playing) player.stop();
+            }
             player.queue.add(track);
             await message.channel.send({ embeds: [getPlayMessage(track, player)] });
 
