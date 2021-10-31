@@ -1,6 +1,7 @@
 const guildLogsDC = require("../../schemas/guildLogs-dc.js");
 const mongo = require('../../mongo.js');
 const { MessageEmbed } = require("discord.js");
+const dayjs = require('dayjs');
 
 module.exports = {
     name: "logs",
@@ -20,9 +21,11 @@ module.exports = {
                     return await message.channel.send({ embeds: [toSend] });
                 }
 
-                console.log(guildLogs["createdAt"]);
+                let date = dayjs(guildLogs["createdAt"]);
 
                 const desc = [];
+                desc.push(`Since **${date.format("DD/MM/YY HH:MM")}**`);
+
                 desc.push(`**${guildLogs["guildTotal"]}** total disconnects`);
 
                 desc.push("**Disconnects given**");
