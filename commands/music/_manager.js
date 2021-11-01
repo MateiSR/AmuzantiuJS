@@ -7,6 +7,7 @@ const { parseDuration } = require("../../utils/format.js");
 const clientID = "e4e458d354a84af5874759ef25eb65d6";
 const clientSecret = process.env.SpotifySecret;
 
+const { dummyGuilds } = require("../fun/dummy.js");
 
 // Initiate the music (erela.js) Manager with some options and listen to some events.
 client.manager = new Manager({
@@ -30,6 +31,9 @@ client.manager = new Manager({
             const guild = client.guilds.cache.get(id);
             if (guild) guild.shard.send(payload);
         },
+    })
+    .on("playerCreate", player => {
+        if (Object.keys(dummyGuilds).includes(player.guild)) delete dummyGuilds[player.guild];
     })
     .on("nodeConnect", node => console.log(`> Music: Node ${node.options.identifier} connected`))
     .on("nodeError", (node, error) => console.log(`> Music: Node ${node.options.identifier} had an error: ${error.message}`))

@@ -78,6 +78,5 @@ module.exports = {
         } else if (res["loadType"] == "LOAD_FAILED") {
             await message.channel.send({ embeds: [embeds.errorEmbed(`Failed to load results for \`${args.join(" ")}\` [${message.author}]`)] });
         }
-
     }
 }
