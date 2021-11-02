@@ -33,7 +33,13 @@ client.manager = new Manager({
         },
     })
     .on("playerCreate", player => {
-        if (Object.keys(dummyGuilds).includes(player.guild)) delete dummyGuilds[player.guild];
+        //if (Object.keys(dummyGuilds).includes(player.guild)) delete dummyGuilds[player.guild];
+        if (Object.keys(dummyGuilds).includes(player.guild)) {
+            player.destroy();
+            client.channels.cache
+                .get(player.textChannel)
+                .send("Please **stop** dummy mode before playing music.");
+        }
     })
     .on("nodeConnect", node => console.log(`> Music: Node ${node.options.identifier} connected`))
     .on("nodeError", (node, error) => console.log(`> Music: Node ${node.options.identifier} had an error: ${error.message}`))
