@@ -34,9 +34,14 @@ async function getData(date) {
     } catch (error) {
         return await getData(date.subtract(1, "day"));
     }
+
     let data = content.items.map((item) => item.str);
-    let city = data[20];
-    let incidence = data[22];
+    let dataEntries = Object.entries(data);
+    for (entry of dataEntries) {
+        if (entry.includes("MUNICIPIUL IASI")) nameIndex = parseInt(entry[0]);
+    }
+    let city = data[nameIndex];
+    let incidence = data[nameIndex + 2];
     return [date.format("DD/MM/YYYY"), city, incidence, src];
 }
 
