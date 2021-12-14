@@ -57,7 +57,7 @@ client.manager = new Manager({
             .send({ embeds: [embeds.replyEmbed(`Playing [${track.title}](${track.uri}) - ${parsedDuration} [${track.requester}]`)] });
         player.currentTrack = track;
     })
-    .on("trackEnd", (player, track) => {
+    .on("trackError", (player, track) => {
         player.currentTrack = undefined;
         player.setQueueRepeat(false);
         player.setTrackRepeat(false);
