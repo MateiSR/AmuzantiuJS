@@ -9,6 +9,11 @@ const clientSecret = process.env.SpotifySecret;
 
 const { dummyGuilds } = require("../fun/dummy.js");
 
+// Initialize genius-lyrics
+const genius = require("genius-lyrics");
+const geniusClient = new genius.Client("");
+global.geniusClient = geniusClient;
+
 // Initiate the music (erela.js) Manager with some options and listen to some events.
 client.manager = new Manager({
         // Pass an array of node. Note: You do not need to pass any if you are using the default values (ones shown below).
