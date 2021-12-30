@@ -38,7 +38,9 @@ client.manager = new Manager({
         },
     })
     .on("playerCreate", player => {
-        //if (Object.keys(dummyGuilds).includes(player.guild)) delete dummyGuilds[player.guild];
+
+        player._247 = false;
+
         if (Object.keys(dummyGuilds).includes(player.guild)) {
             player.destroy();
             client.channels.cache
@@ -69,12 +71,14 @@ client.manager = new Manager({
     })
     .on("queueEnd", (player) => {
         player.timeoutID = undefined;
-        player.timeoutID = setTimeout(() => {
+        if (!player._247) {
+            player.timeoutID = setTimeout(() => {
             client.channels.cache
                 .get(player.textChannel)
                 .send({ embeds: [embeds.replyEmbed("Left voice channel after no activity for `10 minutes`.")] });
             player.destroy();
         }, 10 * 60 * 1000);
+        }
     })
     .on("playerMove", (player, oldChannel, newChannel) => {
         // Note: newChannel will always be a string, if you pass the channel object you will need to get the cached channel.
