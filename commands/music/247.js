@@ -8,7 +8,10 @@ module.exports = {
         const player = client.manager.players.get(message.guild.id);
         if (!player) return await message.channel.send({ embeds: [embeds.errorEmbed("Not playing.")] });
         player._247 = !player._247;
-        if (player._247) return await message.react("✅");
+        if (player._247) {
+            clearTimeout(player.timeoutID);
+            return await message.react("✅");
+        }
         else {
             if (!player.playing && player.queue.size == 0) {
                 player.timeoutID = setTimeout(() => {
