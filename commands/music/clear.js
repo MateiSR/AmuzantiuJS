@@ -3,6 +3,7 @@ const embeds = require("../../utils/embeds.js");
 
 module.exports = {
     name: "clear",
+    aliases: ["stop"],
     description: "clears queue",
     async execute(message, args) {
         const player = client.manager.players.get(message.guild.id);
