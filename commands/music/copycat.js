@@ -47,6 +47,17 @@ module.exports = {
                     player.copycat = false;
                 }
             }
+        })
+        .on("playerMove", (player, oldChannel, newChannel) => {
+            // Note: newChannel will always be a string, if you pass the channel object you will need to get the cached channel.
+            if (newChannel == null && oldChannel !== null) {
+                if (player.copycat) {
+                    try {
+                        message.guild.members.fetch(client.user.id).then(async member => { member.setNickname(""); });
+                        } catch (err) {}
+                }
+                player.destroy();
+            }
         });
     }
 }
