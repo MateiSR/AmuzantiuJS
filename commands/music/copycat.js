@@ -26,38 +26,5 @@ module.exports = {
         else artist = player.currentTrack.title;
         // set bot nickname to "artist"
         await message.guild.members.fetch(client.user.id).then(async member => { member.setNickname(artist.slice(0, 31)); });
-        client.manager.on("trackStart", (player, track) => {
-            if (player.copycat) {
-                let result = getArtistTitle(track.title);
-                if (result) [artist, title] = result;
-                else artist = track.title;
-                // set bot nickname to "artist"
-                try {
-                message.guild.members.fetch(client.user.id).then(async member => { member.setNickname(artist.slice(0, 31)); });
-                } catch (err) {
-                    player.copycat = false;
-                }
-            }
-        })
-        .on("queueEnd", (player) => {
-            if (player.copycat) {
-                try {
-                message.guild.members.fetch(client.user.id).then(async member => { member.setNickname(""); });
-                } catch (err) {
-                    player.copycat = false;
-                }
-            }
-        })
-        .on("playerMove", (player, oldChannel, newChannel) => {
-            // Note: newChannel will always be a string, if you pass the channel object you will need to get the cached channel.
-            if (newChannel == null && oldChannel !== null) {
-                if (player.copycat) {
-                    try {
-                        message.guild.members.fetch(client.user.id).then(async member => { member.setNickname(""); });
-                        } catch (err) {}
-                }
-                player.destroy();
-            }
-        });
     }
 }
