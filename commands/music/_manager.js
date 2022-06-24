@@ -18,7 +18,7 @@ global.geniusClient = geniusClient;
 client.manager = new Manager({
         // Pass an array of node. Note: You do not need to pass any if you are using the default values (ones shown below).
         nodes: [{
-            host: "143.47.190.132",
+            host: process.env.LAVALINK_IP,
             port: 2333,
             password: process.env.LAVALINK_PASS,
             identifier: "cloud-01"
