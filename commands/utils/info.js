@@ -1,9 +1,10 @@
 const { MessageEmbed } = require("discord.js");
 const { version } = require("../../package.json");
+const { globalPrefix } = require("../../command-base.js");
 
 module.exports = {
     name: "info",
-    aliases: ["botinfo", "uptime", "up"],
+    aliases: ["botinfo", "uptime", "up", "status"],
     description: "various stats about bot",
     async execute(message, args) {
         let totalSeconds = (client.uptime / 1000);
@@ -29,9 +30,9 @@ module.exports = {
                 value: `\`${uptime}\``
             }, {
                 name: "Prefix",
-                value: `\`${prefix}\``
+                value: `\`${globalPrefix}\``
             })
-            .setFooter("all rights reserved. Amuzantiu - 2021")
+            .setFooter("MateiSR/AmuzantiuJS - 2022")
             .setColor("#5865F2");
         await message.channel.send({ embeds: [embed] });
     }
