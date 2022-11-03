@@ -1,6 +1,7 @@
 const embeds = require("../../utils/embeds.js");
 const { Permissions } = require('discord.js');
 const { MessageEmbed } = require("discord.js");
+
 module.exports = {
     name: "roleall",
     permissions: [Permissions.FLAGS.MANAGE_ROLES],
