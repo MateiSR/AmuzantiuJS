@@ -1,4 +1,4 @@
-# fly.toml file generated for mateisr-js on 2022-11-03T22:02:02+02:00
+# fly.toml file generated for mateisr-js on 2022-11-03T22:11:18+02:00
 
 app = "mateisr-js"
 kill_signal = "SIGINT"
