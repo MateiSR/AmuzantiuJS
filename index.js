@@ -4,14 +4,6 @@ const { version } = require("./package.json");
 
 require("dotenv").config();
 
-const express = require("express");
-
-const app = express();
-
-app.get('/', async (req,res) =>{
-    return res.send('Amuzantiu is functioning normally')
-  })
-app.listen(8999, () => {})
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS] });
 global.client = client;
