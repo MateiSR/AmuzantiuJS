@@ -2,5 +2,7 @@ app = "mateisr-js"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
+services = []
 
 [env]
+  NODE_ENV="production"

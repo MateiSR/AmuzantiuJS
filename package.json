@@ -2,7 +2,8 @@
     "name": "Amuzantiu",
     "version": "1.1.8",
     "engines": {
-        "node": "16.9.x"
+        "node": ">=16.x",
+        "npm": ">=8.x"
     },
     "description": "",
     "main": "index.js",
