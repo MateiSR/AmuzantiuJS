@@ -2,8 +2,7 @@
     "name": "Amuzantiu",
     "version": "1.1.8",
     "engines": {
-        "node": ">=18.x",
-        "npm": ">=8.x"
+        "node": "18.x"
     },
     "description": "",
     "main": "index.js",
